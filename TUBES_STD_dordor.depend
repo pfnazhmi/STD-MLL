@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1671798764 source:c:\users\hp\sem3\struktur-data\tubes_std_dordor\main.cpp
+	"city.h"
+	"tourist.h"
+	<iostream>
+
+1671800047 c:\users\hp\sem3\struktur-data\tubes_std_dordor\city.h
+	<iostream>
+	"tourist.h"
+
+1671196543 c:\users\hp\sem3\struktur-data\tubes_std_dordor\relasi.h
+	"city.h"
+	"tourist.h"
+	<iostream>
+
+1671796511 c:\users\hp\sem3\struktur-data\tubes_std_dordor\tourist.h
+	<iostream>
+
+1671799091 source:c:\users\hp\sem3\struktur-data\tubes_std_dordor\city.cpp
+	"city.h"
+
+1671796256 source:c:\users\hp\sem3\struktur-data\tubes_std_dordor\tourist.cpp
+	"tourist.h"
+
