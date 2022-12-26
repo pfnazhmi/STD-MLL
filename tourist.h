@@ -11,8 +11,8 @@ using namespace std;
 #define nil NULL
 
 struct Tourist{
-    string name;
-    string age;
+    string name,status;
+    char gender;
 };
 
 typedef Tourist infoTourist;

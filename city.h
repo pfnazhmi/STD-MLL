@@ -13,7 +13,8 @@ using namespace std;
 #define nil NULL
 
 struct City{
-    string name,country;
+    string name, code;
+    int totalDestination;
 };
 
 typedef City infoCity;
@@ -27,38 +28,43 @@ struct listRelasi{
 
 struct elementCity{
     infoCity info;
-    adrCity next;
     listRelasi child;
-};
-struct elementRelasi{
-    adrRelasi next;
-    adrTourist info;
+    adrCity next;
 };
 
 struct listCity{
      adrCity first;
 };
 
+struct elementRelasi{
+    adrRelasi next;
+    adrTourist info;
+};
 
+//City
 void createCityList(listCity &L);
 adrCity newElemetCity(infoCity data);
 void insertLastC(listCity &L, adrCity T);
 void deleteLastC(listCity &L, adrCity &T);
 void showCity(listCity L);
-infoCity addMainCity(infoCity &dataCity);
+adrRelasi findElmChild (listRelasi L, adrTourist rel);
 
+//Relasi
 void createRelasi(listRelasi &L);
 adrRelasi newElemenRelasi(adrTourist data);
 void insertLastR(listRelasi &L, adrRelasi R);
 void deleteLastR(listRelasi &L, adrRelasi &R);
 void showRelasi(listRelasi L);
-
-int selectmenu();
-int countTourist(listCity L, string fCityName, string fCityCountry);
-adrRelasi findElmChild (listRelasi L, adrTourist rel);
 adrCity findElmCity (listCity L, infoCity cit);
-void ShowAllData(listCity Lcity, listTourist Ltour);
+
+int countTourist(listCity L, string fCityname, string fCitycountry);
+void ShowAllData(listCity Lcity);
 void FindMaxData(listCity Lcity);
 void FindMinData(listCity Lcity);
+void deleteCity(listCity &L, infoCity iCity);
+infoCity addMainCity(infoCity &dataCity);
+void addForFind(infoCity &fCity, infoTourist &fTourist);
+//menu
+int selectmenu();
 
 #endif // CITY_H_INCLUDED

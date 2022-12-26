@@ -6,8 +6,7 @@ void createTouristList(listTourist &L){
 
 adrTourist newElemenTourist(infoTourist data){
     adrTourist T = new elementTourist;
-    info(T).name = data.name;
-    info(T).age = data.age;
+    info(T) = data;
     next(T) = nil;
 
     return T;
@@ -42,10 +41,15 @@ void showTourist(listTourist L){
     T = first(L);
     infoTourist data;
 
+    int i = 1;
     while(T!=nil){
         data = info(T);
+        cout<<endl;
+        cout<<"Data turis ke-"<<i<<endl;
         cout<< "Nama Pengunjung: "<<data.name<<endl;
-        cout<< "Umur Pengunjung: "<<data.age<<endl;
+        cout<< "Status: "<<data.status<<endl;
+        cout<< "Gender: "<<data.gender<<endl;
+        cout<<endl;
         T = next(T);
     }
 };
@@ -54,7 +58,7 @@ adrTourist findElmTourist (listTourist L, infoTourist x){
     adrTourist pTour;
     pTour = first(L);
     while (pTour!=nil) {
-        if(info(pTour).name== x.name && info(pTour).age== x.age){
+        if(info(pTour).name== x.name && info(pTour).status== x.status && info(pTour).gender == x.gender){
             return pTour;
             break;
         }
@@ -66,8 +70,10 @@ adrTourist findElmTourist (listTourist L, infoTourist x){
 infoTourist addMainTourist(infoTourist &dataTour){
     cout<<"Name: ";
     cin>>dataTour.name;
-    cout<<"Age: ";
-    cin>>dataTour.age;
+    cout<<"Status: ";
+    cin>>dataTour.status;
+    cout<<"Gender: ";
+    cin>>dataTour.gender;
     cout<<endl;
 
     return dataTour;

@@ -6,10 +6,8 @@ void createCityList(listCity &L){
 
 adrCity newElemetCity(infoCity data){
     adrCity C = new elementCity;
-    info(C).name = data.name;
-    info(C).country = data.country;
+    info(C) = data;
     next(C) = nil;
-    createRelasi(child(C));
 
     return C;
 };
@@ -36,6 +34,7 @@ void deleteLastC(listCity &L, adrCity &C){
     }
     C = next(Q);
     next(Q) = nil;
+    cout<<"Data berhasil dihapus"<<endl;
 };
 
 void showCity(listCity L){
@@ -43,25 +42,31 @@ void showCity(listCity L){
     C = first(L);
     infoCity data;
 
+    cout<<endl;
+    int i = 1;
     while(C!=nil){
+        cout<<endl;
+        cout<<"Data kota ke-"<<i<<endl;
         data = info(C);
         cout<< "Nama Kota: "<<data.name<<endl;
-        cout<< "Dari Negara: "<<data.country<<endl;
-        cout<<endl;
+        cout<< "Kode Kota: "<<data.code<<endl;
+        cout<< "Jumlah destinasi: "<<data.totalDestination<<endl;
         C = next(C);
+        i++;
     }
 };
 
 infoCity addMainCity(infoCity &dataCity){
-    cout<<"City: ";
+    cout<<"Kota: ";
     cin>>dataCity.name;
-    cout<<"Country: ";
-    cin>>dataCity.country;
+    cout<<"Kode: ";
+    cin>>dataCity.code;
+    cout<<"Jumlah destinasi: ";
+    cin>>dataCity.totalDestination;
     cout<<endl;
 
     return dataCity;
 }
-
 
 void createRelasi(listRelasi &L){
     first(L) = nil;
@@ -99,21 +104,11 @@ void deleteLastR(listRelasi &L, adrRelasi &R){
     next(Q) = nil;
 };
 
-void showRelasi(listRelasi L){
-    adrRelasi R;
-    R = first(L);
-
-    while(R!=nil){
-        cout<<"show relasi"<<info(R)<<endl;
-        R = next(R);
-    }
-};
-
 adrCity findElmCity (listCity L, infoCity cit){
     adrCity pCity;
     pCity = first(L);
     while (pCity!=nil) {
-        if(info(pCity).name== cit.name && info(pCity).country==cit.country){
+        if(info(pCity).name== cit.name && info(pCity).code==cit.code && info(pCity).totalDestination == cit.totalDestination){
             return pCity;
             break;
         }
@@ -135,64 +130,32 @@ adrRelasi findElmChild (listRelasi L, adrTourist rel){
     return  nil;
 };
 
-int countTourist(listCity L, string fCityName, string fCityCountry){
-    adrCity c;
-    infoCity fcit;
-    fcit.name = fCityName;
-    fcit.country = fCityCountry;
-    c = findElmCity(L, fcit);
-    listRelasi lr = child(c);
-    adrRelasi p;
+int countTourist(listCity L, string fCityname, string fCityCode, int fCityTotal){
+    adrCity Pcity;
+    infoCity fCity;
+
+    fCity.name=fCityname;
+    fCity.code=fCityCode;
+    fCity.totalDestination=fCityTotal;
+    Pcity = findElmCity(L, fCity);
+    listRelasi lr = child(Pcity);
+
+    adrRelasi pRel;
     int countTour = 0;
-    p = first(lr);
-    while(p!=nil){
+    pRel = first(lr);
+    while(pRel!=nil){
         countTour++;
-        p=next(p);
+        pRel=next(pRel);
     }
-
     return countTour;
-
 };
 
-int selectmenu(){
-    cout << "======MENU======" << endl;
-        cout << "1. Menambah data kota wisata" << endl;
-        cout << "2. Menambah data turis" << endl;
-        cout << "3. Menambah data perjalanan" << endl;
-        cout << "4. Menghapus data kota wisata" << endl;
-        cout << "5. Menampilkan data kota atau turis" << endl;
-        cout << "6. Menampilkan data kota dengan pengunjung terbanyak" << endl;
-        cout << "7. Menampilkan data kota dengan pengunjung paling sedikit" << endl;
-        cout << "0. Exit" << endl;
-        cout << "Masukkan menu : ";
-        int input = 0;
-        cin >> input;
-        return input;
-};
-
-void ShowAllData(listCity Lcity, listTourist Ltour){
-    adrCity pCity = first(Lcity);
-
-    while(pCity!=nil){
-        cout<<"==========City========="<<endl;
-        cout<<"Name: "<<info(pCity).name<<endl;
-        cout<<"Country: "<<info(pCity).country<<endl;
-        adrRelasi pTour = first(child(pCity));
-        while(pTour!=nil){
-            cout<<"==========Touris========="<<endl;
-            cout<<"Name: "<<info(info(pTour)).name<<endl;
-            cout<<"Age: "<<info(info(pTour)).age<<endl;
-            pTour = next(pTour);
-        }
-        pCity = next(pCity);
-    }
-};
 
 void FindMaxData(listCity Lcity){
     adrCity pCity = first(Lcity);
-    adrCity vMax;
+    adrCity vMax=nil;
     int maxVal = 0;
-    int i;
+    int i = 0;
 
     while(pCity!=nil){
         i=0;
@@ -208,13 +171,14 @@ void FindMaxData(listCity Lcity){
         pCity = next(pCity);
     }
 
+    cout<<"Kota dengan jumlah pengunjung terbanyak adalah Kota "<<info(vMax).name<<endl<<"dengan jumlah pengunjung sebanyak "<<maxVal<<" Pengunjung"<<endl;
 };
 
 void FindMinData(listCity Lcity){
     adrCity pCity = first(Lcity);
-    adrCity vMin;
-    int minVal = 0;
-    int i;
+    adrCity vMin=nil;
+    int minVal = 10;
+    int i = 0;
 
     while(pCity!=nil){
         i=0;
@@ -229,4 +193,93 @@ void FindMinData(listCity Lcity){
         }
         pCity = next(pCity);
     }
+    cout<<"Kota dengan jumlah pengunjung paling sedikit adalah Kota " <<info(vMin).name<<endl<<"dengan jumlah pengunjung sebanyak "<<minVal<<" Pengunjung"<<endl;
+};
+
+void deleteCity(listCity &L, infoCity iCity){
+    adrCity prec = first(L);
+
+    while(prec!=nil){
+        if(info(next(prec)).name == iCity.name && info(next(prec)).code == iCity.code && info(next(prec)).totalDestination == iCity.totalDestination){
+            break;
+        }
+        prec = next(prec);
+    }
+    if(prec!=nil){
+        adrCity P = next(prec);
+        next(prec) = next(P);
+        next(P) = nil;
+        free(P);
+    }
+
+    cout<<"Data berhasil dihapus"<<endl;
+}
+
+
+void ShowAllData(listCity Lcity){
+    adrCity pCity = first(Lcity);
+
+    while(pCity!=nil){
+        cout<<endl;
+        cout<<"==========Kota "<<info(pCity).name<<"========="<<endl;
+        cout<<"Kode Kota: "<<info(pCity).code<<endl;
+        cout<<"Jumlah Destinasi: "<<info(pCity).code<<endl;
+        adrRelasi pTour = first(child(pCity));
+        if (pTour==nil){
+            cout<<"Belum Ada Pengunjung"<<endl<<endl;
+        }
+        int j = 1;
+        while(pTour!=nil){
+            cout<<endl<<"---Turis "<<j<<"---"<<endl;
+            cout<<"Nama: "<<info(info(pTour)).name<<endl;
+            cout<<"Status: "<<info(info(pTour)).status<<endl;
+            cout<<"Gender: "<<info(info(pTour)).gender<<endl;
+            pTour = next(pTour);
+            j++;
+        }
+        pCity = next(pCity);
+    }
+};
+
+void showRelasi(listRelasi L){
+    adrRelasi R;
+    R = first(L);
+
+    while(R!=nil){
+        cout<<"show relasi"<<info(R)<<endl;
+        R = next(R);
+    }
+};
+
+
+void addForFind(infoCity &fCity, infoTourist &fTourist){
+    cout<<"Nama Turis :";
+    cin>>fTourist.name;
+    cout<<"Status Turis :";
+    cin>>fTourist.status;
+    cout<<"Gender Turis :";
+    cin>>fTourist.gender;
+    cout<<"Kota Tujuan :";
+    cin>>fCity.name;
+    cout<<"Kode Kota :";
+    cin>>fCity.code;
+    cout<<"Jumlah Destinasi :";
+    cin>>fCity.totalDestination;
+    cout<<endl;
+}
+
+int selectmenu(){
+    cout << "======MENU======" << endl;
+        cout << "1. Menambah data kota wisata" << endl;
+        cout << "2. Menambah data turis" << endl;
+        cout << "3. Menambah data perjalanan" << endl;
+        cout << "4. Menghapus data kota wisata" << endl;
+        cout << "5. Menampilkan data kota atau turis atau seluruhnya(MLL)" << endl;
+        cout << "6. Menampilkan data kota dengan pengunjung terbanyak" << endl;
+        cout << "7. Menampilkan data kota dengan pengunjung paling sedikit" << endl;
+        cout << "0. Exit" << endl;
+        cout << "Masukkan menu : ";
+        int input = 0;
+        cin >> input;
+        return input;
 };
