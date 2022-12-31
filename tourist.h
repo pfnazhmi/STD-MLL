@@ -1,7 +1,6 @@
 #ifndef TOURIST_H_INCLUDED
 #define TOURIST_H_INCLUDED
 
-
 #include <iostream>
 using namespace std;
 
@@ -13,6 +12,7 @@ using namespace std;
 struct Tourist{
     string name,status;
     char gender;
+    int kode;
 };
 
 typedef Tourist infoTourist;
@@ -28,11 +28,11 @@ struct listTourist{
 };
 
 void createTouristList(listTourist &L);
-adrTourist newElemenTourist(infoTourist data);
-void insertLastT(listTourist &L, adrTourist C);
+adrTourist newElementTourist(infoTourist data);
+void addToLastT(listTourist &L, adrTourist C);
 void deleteLastT(listTourist &L, adrTourist &C);
 void showTourist(listTourist L);
-adrTourist findElmTourist (listTourist L, infoTourist x);
+adrTourist findElmTourist (listTourist L, int x);
 infoTourist addMainTourist(infoTourist &dataTour);
 
 #endif // TOURIST_H_INCLUDED
