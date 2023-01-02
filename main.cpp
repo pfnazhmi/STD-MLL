@@ -105,7 +105,7 @@ int main(){
     addToLastR(child(adrC),adrR);
 
     //menu
-    pilihan = selectmenu();
+    pilihan = selectMenu();
 
     while (pilihan != 0){
         switch (pilihan){
@@ -156,68 +156,123 @@ int main(){
                 break;
             }
             case 4:{
-                cout<<"Hapus data kota(cari/akhir)";
+                cout<<"Menghapus Data pada:"<<endl;
+                cout<<"a. Hapus Data Kota Wisata"<<endl;
+                cout<<"b. Hapus Data Turis di kota tertentu"<<endl;
+                cout<<"Masukan Pilihan: ";
                 cin>>hapus;
-                if (hapus=="cari"){
+                cout<<endl;
+                if (hapus == "a" || hapus == "A"){
                     cout<<"Masukkan data kota yang ingin dihapus : "<<endl;
-                    cout<<"Nama Kota: ";
+                    cout<<"Nama Kota Wisata: ";
                     cin>>namaKota;
                     cout<<"Kode Kota : ";
                     cin>>kodeC;
                     deleteCity(Lcity,namaKota,kodeC);
-                }else if (hapus=="akhir"){
-                    deleteLastC(Lcity, adrC);
+                }else if(hapus == "b" || hapus == "B"){
+                    cout<<"Masukkan data turis yang ingin dihapus di kota tertentu"<<endl;
+                    cout<<"Nama Kota Wisata: ";
+                    cin>>namaKota;
+                    cout<<"Kode Kota: ";
+                    cin>>kodeC;
+                    cout<<"Nama Turis: ";
+                    cin>>namaTourist;
+                    cout<<"Kode Turis : ";
+                    cin>>kodeT;
+                    deleteTourist(Lcity, Ltourist, kodeC,  kodeT);
                 }
                 break;
             }
             case 5:{
-                cout<<"Tampilkan Data(semua / turis / kota): ";
+                cout<<"Tampilkan Data Pada: "<<endl;
+                cout<<"a. Menampilkan Data Kota Wisata dengan pengunjung nya"<<endl;
+                cout<<"b. Menampilkan Data Turis"<<endl;
+                cout<<"c. Menampilkan Data Kota Wisata"<<endl;
+                cout<<"d. Menampilkan Riwayat Perjalanan Turis"<<endl<<endl;
+                cout<<"Masukan Pilihan: ";
                 cin>>tampil;
+                cout<<endl;
 
-                if(tampil == "semua" || tampil == "Semua"){
+                if(tampil == "a" || tampil == "A"){
                     ShowAllData(Lcity);
-                }else if (tampil == "turis" || tampil == "Turis"){
+                }else if (tampil == "b" || tampil == "B"){
                     showTourist(Ltourist);
-                }else if (tampil == "kota" || tampil == "Kota"){
+                }else if (tampil == "c" || tampil == "C"){
                     showCity(Lcity);
+                }else if(tampil == "d" || tampil == "D"){
+                    ShowInfoTourist(Ltourist);
+                    cout<<endl;
+                    cout<<"Masukan Nama Turis: ";
+                    cin>>namaTourist;
+                    cout<<"Masukan Kode Turis: ";
+                    cin>>kodeT;
+                    showTouristInCity(Lcity,Ltourist, kodeT);
                 }
                 break;
             }
             case 6:{
-                FindMaxData(Lcity);
+                cout<<"Cari Data Paling Banyak pada: "<<endl;
+                cout<<"a. Data Kota Wisata yang paling banyak dikunjungi oleh turis"<<endl;
+                cout<<"b. Data Turis yang paling banyak mengunjungi kota wisata "<<endl<<endl;
+                cout<<"Masukan pilihan: ";
+                cin>> tampil;
+                if(tampil == "a" || tampil == "A"){
+                    FindMaxData(Lcity);
+                }else if (tampil == "b" || tampil == "B"){
+                    touristMostTrip(Lcity,Ltourist);
+                }
                 break;
             }
             case 7:{
-                FindMinData(Lcity);
+                cout<<"Cari Data Paling Sedikit pada: "<<endl;
+                cout<<"a. Data Kota Wisata yang paling sedikit dikunjungi oleh turis"<<endl;
+                cout<<"b. Data Turis yang paling sedikit mengunjungi kota wisata"<<endl<<endl;
+                cout<<"Masukan pilihan: ";
+                cin>> tampil;
+                if(tampil == "a" || tampil == "A"){
+                    FindMinData(Lcity);
+                }else if (tampil == "b" || tampil == "B"){
+                    touristLeastTrip(Lcity,Ltourist);
+                }
                 break;
             }
             case 8:{
+                cout<<"Masukan Nama Kota Wisata: ";
+                cin>>namaKota;
                 cout<<"Masukan kode kota: ";
                 cin>>kodeC;
-                cout<<"Terdapat "<<countTourist(Lcity, kodeC)<<" pengunjung"<<endl;
+                cout<<"Terdapat "<<countTourist(Lcity, kodeC)<<" pengunjung pada kota "<<namaKota<<endl;
                 break;
             }
             case 9:{
                 adrC = nil;
                 adrT = nil;
-                cout<<"Tampilkan pencarian(kota / turis): ";
+                cout<<"Tampilkan pencarian pada: "<<endl;
+                cout<<"a. Kota Wisata"<<endl;
+                cout<<"b. Turis "<<endl;
+                cout<<"Masukan Pilihan: ";
                 cin>>tampil;
-                if (tampil == "kota"){
-                    cout<<"masukan kode kota: ";
+                cout<<endl;
+                if (tampil == "a" || tampil == "A"){
+                    cout<<"Masukan Nama Kota Wisata: ";
+                    cin>>namaKota;
+                    cout<<"Masukan kode Kota Wisata: ";
                     cin>>kodeC;
                     adrC = findElmCity(Lcity, kodeC);
-                }else if (tampil == "turis"){
-                    cout<<"masukan kode turis: ";
+                }else if (tampil == "b" || tampil == "B"){
+                    cout<<"Masukan Nama turis: ";
+                    cin>> namaTourist;
+                    cout<<"Masukan kode turis: ";
                     cin>>kodeT;
                     adrT = findElmTourist(Ltourist, kodeT);
                 }
                 if (adrC!=nil){
-                    cout<<"Data Ditemukan"<<endl<<endl;
-                    cout<< "Nama Kota: "<<info(adrC).name<<endl;
+                    cout<<endl<<"--- Data Ditemukan ---"<<endl<<endl;
+                    cout<< "Nama Kota Wisata: "<<info(adrC).name<<endl;
                     cout<< "Kode Kota: "<<info(adrC).code<<endl;
                     cout<< "Jumlah destinasi: "<<info(adrC).totalDestination<<endl;
                 }else if (adrT!=nil){
-                    cout<<"Data Ditemukan"<<endl<<endl;
+                    cout<<endl<<"--- Data Ditemukan ---"<<endl<<endl;
                     cout<< "Nama Pengunjung: "<<info(adrT).name<<endl;
                     cout<< "Kode: "<<info(adrT).kode<<endl;
                     cout<< "Status: "<<info(adrT).status<<endl;
@@ -240,15 +295,15 @@ int main(){
 
             if (kembali == 'Y' || kembali == 'y'){
                 cout << endl;
-                pilihan = selectmenu();
+                pilihan = selectMenu();
             }
             else if (kembali == 'N' || kembali == 'n'){
                 pilihan = 0;
             }
-            //else{
-               // cout << endl<< "Kembali ke menu utama? (Y/N): ";
-                //cin >> kembali;
-            //}
+            else{
+                cout << endl<< "Kembali ke menu utama? (Y/N): ";
+                cin >> kembali;
+            }
         }
         cout << endl<< "ANDA TELAH KELUAR DARI PROGRAM"<<endl;
         return 0;

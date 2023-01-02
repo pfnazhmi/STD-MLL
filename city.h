@@ -43,11 +43,11 @@ struct elementRelasi{
 void createCityList(listCity &L);
 adrCity newElementCity(infoCity data);
 void addToLastC(listCity &L, adrCity T);
-void deleteLastC(listCity &L, adrCity &T);
 void showCity(listCity L);
 adrRelasi findElmChild (listRelasi L, adrTourist rel);
 adrCity findElmCity (listCity L, int kode);
-void deleteCity(listCity &L,string namaKota,int kode);
+int cekElementFirst(listCity LC);
+infoCity addMainCity(infoCity &dataCity);
 
 //Relasi
 void createRelasi(listRelasi &L);
@@ -62,11 +62,14 @@ void ShowAllData(listCity Lcity);
 void FindMaxData(listCity Lcity);
 void FindMinData(listCity Lcity);
 void addForTrip(string &namaKota,int &kodeKota, string &namaTourist, int &kodeTourist);
-infoCity addMainCity(infoCity &dataCity);
-void showTouristInCity(listCity L)
+void showTouristInCity(listCity LCity, listTourist LTour, int kode);
+void touristMostTrip(listCity LCity, listTourist LTour);
+void touristLeastTrip(listCity LCity, listTourist LTour);
+void deleteTourist(listCity &Lcity, listTourist &Ltour, int kodeK, int kodeT);
+void deleteCity(listCity &L,string namaKota,int kode);
 
 //menu
-int selectmenu();
+int selectMenu();
 void helpPanduan();
 
 #endif // CITY_H_INCLUDED

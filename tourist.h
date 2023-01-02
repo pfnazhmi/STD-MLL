@@ -29,10 +29,10 @@ struct listTourist{
 
 void createTouristList(listTourist &L);
 adrTourist newElementTourist(infoTourist data);
-void addToLastT(listTourist &L, adrTourist C);
-void deleteLastT(listTourist &L, adrTourist &C);
+void addToLastT(listTourist &L, adrTourist T);
 void showTourist(listTourist L);
-adrTourist findElmTourist (listTourist L, int x);
+adrTourist findElmTourist (listTourist L, int kodeTuris);
 infoTourist addMainTourist(infoTourist &dataTour);
+void ShowInfoTourist(listTourist L);
 
 #endif // TOURIST_H_INCLUDED

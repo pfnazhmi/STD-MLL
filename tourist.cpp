@@ -30,19 +30,6 @@ void addToLastT(listTourist &L, adrTourist T){
     }
 };
 
-void deleteLastT(listTourist &L, adrTourist &T){
-    /*{IS. L tidak kosong
-        FS. ElementTourist terakhir L sudah dihapus. elementTourist yang dihapus disimpan pada T }*/
-    adrTourist Q;
-    Q = first(L);
-
-    while(next(next(Q))!= nil){
-        Q = next(Q);
-    }
-    T = next(Q);
-    next(Q) = nil;
-};
-
 void showTourist(listTourist L){
     /*{IS. Terdefinisi listTourist L
         FS. menampilkan semua list turis jika ada}*/
@@ -54,7 +41,7 @@ void showTourist(listTourist L){
         cout<<"Tidak Ada Data"<<endl;
     }else{
         int i = 1;
-        cout<<"Data Turis"<<endl;
+        cout<<"--- Data Turis ---"<<endl;
         while(T!=nil){
             data = info(T);
             cout<<endl;
@@ -63,7 +50,30 @@ void showTourist(listTourist L){
             cout<< "Kode: "<<data.kode<<endl;
             cout<< "Status: "<<data.status<<endl;
             cout<< "Gender: "<<data.gender<<endl;
+            i++;
+            T = next(T);
+        }
+    }
+};
+
+void ShowInfoTourist(listTourist L){
+    /*{IS. Terdefinisi listTourist L
+        FS. menampilkan semua list turis jika ada}*/
+    adrTourist T;
+    T = first(L);
+    infoTourist data;
+
+    if(T==nil){
+        cout<<"Tidak Ada Data"<<endl;
+    }else{
+        int i = 1;
+        cout<<"--- Info Data Turis ---"<<endl;
+        while(T!=nil){
+            data = info(T);
             cout<<endl;
+            cout<<"Data turis ke-"<<i<<endl;
+            cout<< "Nama Pengunjung: "<<data.name<<endl;
+            cout<< "Kode: "<<data.kode<<endl;
             i++;
             T = next(T);
         }
